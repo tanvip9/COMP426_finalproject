@@ -28,14 +28,21 @@
 
 import express from 'express';
 import bodyParser from 'body-parser';
-import * as sqlite3 from 'sqlite-async';
+import {db} from './db.mjs';
 import setupDatabase from './db.mjs';
 
 const app = express();
 const port = 3000;
 
+// const api_ = require(path.join(__dirname, "/API"));
+// app.use("/api", api_);
+
 app.use(bodyParser.json());
-app.use(express.static('public')); // Serve your CSS/HTML files
+
+app.use("/", express.static(path.join(__dirname, "/Client"))); 
+app.use("/home", express.static(path.join(__dirname, "/Client"))); 
+app.use("/registration", express.static(path.join(__dirname, "/Client/registration.html"))); 
+app.use("*", express.static(path.join(__dirname, "/Client/404.html"))); 
 
 setupDatabase().then(db => {
     app.post('/submit-form', async (req, res) => {

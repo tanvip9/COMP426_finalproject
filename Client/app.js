@@ -1,6 +1,7 @@
 
 //import { APIController } from "./model.js";
-import {db} from "./db.mjs";
+//import {db} from "../db.mjs";
+//alert("Welcome to our website");
 
 
 // export class View{
@@ -20,28 +21,28 @@ import {db} from "./db.mjs";
 //     }
 // }
 
-document.addEventListener('DOMContentLoaded', function () {
-        const form = document.querySelector('form');
-        form.addEventListener('submit', async function (e) {
-            e.preventDefault();
-            const data = {
-                email: document.getElementById('email').value,
-                firstName: document.getElementById('firstName').value,
-                lastName: document.getElementById('lastName').value,
-            };
-            
-            fetch('/submit-form', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-            .then(response => response.json())
-            .then(data => console.log('Success:', data))
-            .catch((error) => console.error('Error:', error));
-        });
-    });
+// document.addEventListener('DOMContentLoaded', function () {
+//         const form = document.querySelector('form');
+//         form.addEventListener('submit', async function (e) {
+//             e.preventDefault();
+//             const data = {
+//                 email: document.getElementById('email').value,
+//                 firstName: document.getElementById('firstName').value,
+//                 lastName: document.getElementById('lastName').value,
+//             };
+//             
+//             fetch('/submit-form', {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json',
+//                 },
+//                 body: JSON.stringify(data),
+//             })
+//             .then(response => response.json())
+//             .then(data => console.log('Success:', data))
+//             .catch((error) => console.error('Error:', error));
+//         });
+//     });
 
 // UI Component
 // const UIController = (function() {
