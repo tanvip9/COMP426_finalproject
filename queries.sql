@@ -1,3 +1,0 @@
--- SQLite
-
-Select * From users; 

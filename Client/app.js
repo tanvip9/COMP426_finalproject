@@ -3,6 +3,40 @@
 //import {db} from "../db.mjs";
 //alert("Welcome to our website");
 
+document.addEventListener("DOMContentLoaded", function(){
+    const postBtn = document.getElementById("post")
+    const getAllBtn = document.getElementById("get-all")
+    const getOneBtn = document.getElementById("get-one")
+
+    const sampleObject = {
+        message: "Test message"
+    }
+    postBtn.onclick = function(){
+        //alert("Clicked");
+        fetch("/api/registration", {
+            method: "POST",
+            body: JSON.stringify(sampleObject),
+            headers: {
+                "content-type" : "application/json"
+            }
+        })
+        alert(JSON.stringify(sampleObject))
+        // .then(res => {
+        //     if (!res.ok) {
+        //         throw new Error('Network response was not ok');
+        //     }
+        //     return res.json();
+        // })
+        //.then(res => res.json())
+        .then(data => {
+            console.log(data)
+        }).catch(err => {
+            console.log("the error from post request: ", err)
+        })
+    }
+})
+
+
 
 // export class View{
 //     constructor(){
