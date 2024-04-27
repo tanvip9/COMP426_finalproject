@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function(){
         //Created_Data = new Data()
     }
 
-    alert(message_);
+   // alert(message_);
     postBtn.onclick = async function(){
         //alert("Clicked");
         message_.email = emailEl.value;
