@@ -47,7 +47,7 @@ app.use(bodyParser.json());
 
 app.use("/", express.static(path.join(__dirname, "/Client"))); 
 app.use("/home", express.static(path.join(__dirname, "/Client"))); 
-app.use("/registration", express.static(path.join(__dirname, "/Client/registration.html"))); 
+//app.use("/registration", express.static(path.join(__dirname, "/Client/registration.html"))); 
 app.use("*", express.static(path.join(__dirname, "/Client/404.html"))); 
 //app.use(express.static(path.join(__dirname, 'Client')));
 
@@ -66,6 +66,14 @@ app.use("*", express.static(path.join(__dirname, "/Client/404.html")));
     // app.use((req, res) => {
     //     res.status(404).sendFile(path.join(__dirname, 'Client/404.html'));
     // });
+
+    app.post('/registration', (req, res) => {
+        const{message , email, firstName, lastName} = req.body;
+        //console.log(const{message , email, firstName, lastName});
+        console.log(email);
+        console.log("Hello World");
+        return res.sendStatus(201).json("Success!");
+    });
 
     app.listen(port, () => {
         console.log(`Server running on http://localhost:${port}`);

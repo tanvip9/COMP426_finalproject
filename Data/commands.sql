@@ -1,7 +1,7 @@
 -- SQLite
 
 CREATE TABLE IF NOT EXISTS users (
-            user_name STRING PRIMARY KEY,
+            email STRING PRIMARY KEY,
             first_name STRING,
             last_name STRING
         )

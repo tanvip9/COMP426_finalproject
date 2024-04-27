@@ -8,8 +8,8 @@ const RegistrationFormH = require("./RegistrationFormHandler.js")
 // router.get("/Register", RegistrationFormH.getMessages)
 // router.get("/Registration/:id", RegistrationFormH.getMessageByID)
 
-router.post("/api/register", RegistrationFormH.postMessage)
-router.get("/api/register", RegistrationFormH.getMessages)
-router.get("/api/register/:id", RegistrationFormH.getMessageByID)
+// router.post("/api/register", RegistrationFormH.postMessage)
+// router.get("/api/register", RegistrationFormH.getMessages)
+// router.get("/api/register/:id", RegistrationFormH.getMessageByID)
 
 module.exports = router

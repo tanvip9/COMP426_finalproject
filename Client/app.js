@@ -3,37 +3,70 @@
 //import {db} from "../db.mjs";
 //alert("Welcome to our website");
 
+let port = 3000;
+let host = 'localhost';
+
 document.addEventListener("DOMContentLoaded", function(){
     const postBtn = document.getElementById("post")
-    const getAllBtn = document.getElementById("get-all")
-    const getOneBtn = document.getElementById("get-one")
+    const successEl = document.getElementById("success-msg")
+    const emailEl = document.querySelector("input[email = 'email']")
+    const firstNameEl = document.querySelector("input[firstName = 'firstName']")
+    const lastNameEl = document.querySelector("input[lastName = 'lastName']")
 
-    const sampleObject = {
+    // const getAllBtn = document.getElementById("get-all")
+    // const getOneBtn = document.getElementById("get-one")
+
+    const message_ = {
         message: "Test message"
+        //Created_Data = new Data()
     }
-    postBtn.onclick = function(){
+
+    alert(message_);
+    postBtn.onclick = async function(){
         //alert("Clicked");
-        fetch("/api/registration", {
+        message_.email = emailEl.value;
+        message_.firstName = firstNameEl.value;
+        message_.lastName = lastNameEl.value;
+        console.log("Message before sending to the server: " + message_);
+        await fetch('http://' + host + ":" + port + '/registration', {
+            //fetch("api/Registration", {
+            //await fetch('/registration', {
             method: "POST",
-            body: JSON.stringify(sampleObject),
+            body: JSON.stringify(message_),
             headers: {
                 "content-type" : "application/json"
             }
         })
-        alert(JSON.stringify(sampleObject))
+
+        // let fetch_result = await fetch('http://' + host + ":" + port + path, {
+        // method: 'POST',
+        // body: JSON.stringify(data),
+        // headers: {
+        //     'Content-Type': 'application/json'
+        //}
+    //});
+        // alert(JSON.stringify(sampleObject))
         // .then(res => {
         //     if (!res.ok) {
         //         throw new Error('Network response was not ok');
         //     }
         //     return res.json();
         // })
-        //.then(res => res.json())
+        .then(res => res.json())
         .then(data => {
-            console.log(data)
+            console.log(data);
+            //data.json();
+            successEl.innerHTML += data.Message;
+            
         }).catch(err => {
             console.log("the error from post request: ", err)
+            successEl.innerHTML += "Something went wrong. Try again";
         })
+        //const data = await response.json();
+        // console.log("Bye World");
+        // alert("Bye");
     }
+    //alert(JSON.stringify(message_));
 })
 
 
