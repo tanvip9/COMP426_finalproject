@@ -110,7 +110,6 @@ UIController = (function() {
             }
         },
 
-
         createGenre(text, value) {
             const html = `<option value="${value}">${text}</option>`;
             document.querySelector(DOMElements.selectGenre).insertAdjacentHTML('beforeend', html);
