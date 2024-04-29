@@ -4,7 +4,7 @@ let timer = {
     longBreak: 15,
     longBreakInterval: 4,
   };
-  const modeButtons = document.querySelector('#js-mode-buttons');
+  const modeButtons = document.querySelector('#buttons');
   modeButtons.addEventListener('click', handleMode);
   
   function handleMode(event) {
@@ -35,8 +35,8 @@ let timer = {
     const minutes = `${remainingTime.minutes}`.padStart(2, '0');
     const seconds = `${remainingTime.seconds}`.padStart(2, '0');
   
-    const min = document.getElementById('js-minutes');
-    const sec = document.getElementById('js-seconds');
+    const min = document.getElementById('minutes');
+    const sec = document.getElementById('seconds');
     min.textContent = minutes;
     sec.textContent = seconds;
   }
@@ -69,7 +69,7 @@ let timer = {
       seconds,
     };
   }
-  let mainButton = document.getElementById('js-btn');
+  let mainButton = document.getElementById('start-timer-btn');
   mainButton.addEventListener('click', () => {
     const { action } = mainButton.dataset;
     if (action === 'start') {
@@ -183,7 +183,7 @@ timer = {
     document.querySelector(`[data-mode="${mode}"]`).classList.add('active');
     document.body.style.backgroundColor = `var(--${mode})`;
     document
-      .getElementById('js-progress')
+      .getElementById('progress-bar')
       .setAttribute('max', timer.remainingTime.total);
   
     updateClock();
@@ -193,12 +193,12 @@ timer = {
     const minutes = `${remainingTime.minutes}`.padStart(2, '0');
     const seconds = `${remainingTime.seconds}`.padStart(2, '0');
   
-    const min = document.getElementById('js-minutes');
-    const sec = document.getElementById('js-seconds');
+    const min = document.getElementById('minutes');
+    const sec = document.getElementById('seconds');
     min.textContent = minutes;
     sec.textContent = seconds;
   
-    const progress = document.getElementById('js-progress');
+    const progress = document.getElementById('progress-bar');
     progress.value = timer[timer.mode] * 60 - timer.remainingTime.total;
   }
   function updateClock() {
@@ -206,8 +206,8 @@ timer = {
     const minutes = `${remainingTime.minutes}`.padStart(2, '0');
     const seconds = `${remainingTime.seconds}`.padStart(2, '0');
   
-    const min = document.getElementById('js-minutes');
-    const sec = document.getElementById('js-seconds');
+    const min = document.getElementById('minutes');
+    const sec = document.getElementById('seconds');
     const time = `${minutes}:${seconds}`;
     min.textContent = minutes;
     sec.textContent = seconds;
@@ -215,11 +215,11 @@ timer = {
     const text = timer.mode === 'pomodoro' ? 'Get back to work!' : 'Take a break!';
     document.title = `${minutes}:${seconds} — ${text}`;
   
-    const progress = document.getElementById('js-progress');
+    const progress = document.getElementById('progress-bar');
     progress.value = timer[timer.mode] * 60 - timer.remainingTime.total;
   }
 
-  mainButton = document.getElementById('js-btn');
+  mainButton = document.getElementById('start-timer-btn');
   mainButton.addEventListener('click', () => {
 
     const { action } = mainButton.dataset;
