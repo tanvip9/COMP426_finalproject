@@ -19,12 +19,15 @@ function App() {
   };
 
   const handleSubmit = async (e) => {
+    alert("submit clicked");
     e.preventDefault();
+    console.log("pre-axios");
     axios({
       method: "post",
-      url: "/api/registration",
-      data: JSON.stringify(formData)
+      url: "http://localhost:3001/api/registration",
+      data: formData
     });
+    console.log("post-axios");
     // try {
     //   const response = axios('/registration', {
     //     method: 'POST',
@@ -85,7 +88,7 @@ function App() {
         <button type="submit">Register</button>
       </form>
     </div>
-  );
+  )
 }
 
 export default App;
