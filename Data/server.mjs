@@ -18,10 +18,16 @@ import {db} from './db.mjs';
     //     res.json(req.body);
     // });
 
-    app.post("/api/registration", (req, res) => {
-        const{email, firstName, lastName} = req.body;
+    app.post("/api/registration", async (req, res) => {
+        const{email, firstName, lastName, login} = req.body;
         console.log(email);
         console.log("Hello World");
+
+        //Checking if the email exists:
+        const userExists = await checkUserExists(email, login);
+        if (userExists) {
+        return res.status(400).json({ message: "Email or login already exists" });
+        }
         
         const queryStr = "INSERT INTO users (email, first_name, last_name) VALUES (?, ?, ?)";
         db.run(queryStr, [email, firstName, lastName], (err) =>  {
@@ -38,6 +44,35 @@ import {db} from './db.mjs';
         });
         //return res.sendStatus(201).json("Success!");
     });
+
+    // app.get("/api/login", async (req, res) => {
+    //     let email = req.query;
+    //     console.log("retrieved email:" + email)
+    //     const queryStr = "Select first_name FROM users WHERE email = (?)";
+    //     db.run(queryStr, [email]);
+    //     console.log("After DB")
+    // });
+
+    app.get("/api/email", async (req, res) => {
+        let email = req.body; // Retrieve email from query parameters
+        console.log("Retrieved email: " + email);
+        
+        const queryStr = "SELECT first_name FROM users WHERE email = ?";
+        db.get(queryStr, [email], (err, row) => {
+          if (err) {
+            console.error("Error retrieving data from the database:", err);
+            res.status(500).json({ error: "Failed to retrieve data" });
+          } else {
+            if (row) {
+              console.log("First name:", row.first_name);
+              res.status(200).json({ firstName: row.first_name });
+            } else {
+              console.log("User not found");
+              res.status(404).json({ message: "User not found" });
+            }
+          }
+        });
+      });
     // app.post('/registration', (req, res) => {
     //     const{email, firstName, lastName} = req.body;
     //     console.log(email);
@@ -58,6 +93,31 @@ import {db} from './db.mjs';
     //     });
     //     //return res.sendStatus(201).json("Success!");
     // });
+
+    app.post("/api/checkUserExists", async (req, res) => {
+        const { email } = req.body;
+        try {
+          const userExists = await checkUserExists(email);
+          console.log(userExists);
+          res.status(200).json({ exists: userExists });
+        } catch (error) {
+          console.error("Error checking user existence:", error);
+          res.status(500).json({ message: "An error occurred while checking user existence" });
+        }
+      });
+
+    const checkUserExists = (email) => {
+        return new Promise((resolve, reject) => {
+          const queryStr = "SELECT COUNT(*) AS count FROM users WHERE login = (?)";
+          db.get(queryStr, [email], (err, row) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(row.count > 0);
+            }
+          });
+        });
+      };
 
     app.listen(port, () => {
         console.log(`Server running on http://localhost:${port}`);
