@@ -15,15 +15,16 @@ document.addEventListener("DOMContentLoaded", function(){
 
     // const getAllBtn = document.getElementById("get-all")
     // const getOneBtn = document.getElementById("get-one")
-
+    
     const message_ = {
         message: "Test message"
         //Created_Data = new Data()
     }
 
    // alert(message_);
-    postBtn.onclick = async function(){
+    postBtn.addEventListener = async function(){
         //alert("Clicked");
+        console.log("Testing");
         message_.email = emailEl.value;
         message_.firstName = firstNameEl.value;
         message_.lastName = lastNameEl.value;

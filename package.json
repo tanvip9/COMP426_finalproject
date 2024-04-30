@@ -15,6 +15,8 @@
     "path": "^0.12.7",
     "spotify-web-api-node": "^5.0.2",
     "sqlite-async": "^1.2.0",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "stream-browserify": "^3.0.0",
+    "url": "^0.11.3"
   }
 }
