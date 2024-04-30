@@ -103,7 +103,7 @@ let timer = {
     clearInterval(interval);
 
     mainButton.dataset.action = 'start';
-    alert("Timer Paused")
+    //alert("Timer Paused")
     mainButton.textContent = 'start';
     mainButton.classList.remove('active');
   }

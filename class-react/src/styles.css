@@ -1,35 +1,163 @@
-.btn.dropdown-toggle  {
-    width:150px;
-    text-align:left;
-}
+body, h1, p, div, form, input, select, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Global styles */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .title{
+    margin-top: 20px;
+  }
 
-span.caret {
-    position: absolute;
-    left: 90%;
-    top: 45%;
-}
+  h1 {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-bottom: 20px;
+    
+  }
+  
+  /* Pomodoro container */
+  .progress-container {
+    width: 100%; /* Adjust as needed */
+    display: flex;
+    justify-content: center; /* Center the progress bar horizontally */
+    align-items: center;
 
-label {
-    padding-top:5px;
-}
+  }
 
-.form-label {
-    padding-left:0px !important;
-}
+#progress-bar {
+    background-color: #007bff;
+    height: 20px;
+    width: 99%; /* Span the entire container */
+    border: 3px solid #111111; /* Thick border */
+    border-radius: 20px;
+    margin: 0 auto;
 
-img {
-    width:140px;
-    height:140px;
-}
+  }
+  
+   /* .progress-bar {
+    background-color: #007bff;
+    height: 20px;
+    width: 100%; /* Span the entire container 
+    border-radius: 10px;
+  }  */
+  
+  .timer {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* .clock {
+    font-size: 36px;
+    font-weight: bold;
+  }
+  
+  .separator {
+    font-size: 24px;
+    vertical-align: middle;
+    margin: 0 5px;
+  } */
 
-.btn-success {
-    background-color: #3b7d4a!important;
-}
+  .clock {
+    font-size: 300px; /* Adjust the font size as needed */
+    font-weight: bold;
+  }
+  
+  .separator {
+    font-size: 100px; /* Adjust the font size as needed */
+    vertical-align: middle;
+    margin: 0 10px; /* Adjust the margin as needed */
+  }
+  
+  .all-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .mode-button {
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .mode-button.active {
+    background-color: #007bff;
+    color: #ffffff;
+  }
+  
+  .start-button {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    width: 25%;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .spotify-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  .form-label, .instructions {
+    margin-bottom: 10px;
+    display: block; /* Ensure the element behaves like a block-level element */
+    width: fit-content; /* Make the width fit the content */
+    margin: 0 auto; /* Center the element horizontally */
+  }
 
-.btn-success:hover {
-    background-color: #4daf64!important;
-}
+  
+  .form-control {
+    width: 25%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .form-group {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  #select_genre,
+  #select_playlist{
+    margin: 0 auto; 
+    display: block; 
+  }
 
-img.track {
-    border: 1px solid #8a8a8a;
-}
+  #btn_submit{
+    width: 25%;
+    padding: 10px 10px;
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  
+  .list-group {
+    margin-top: 20px;
+  }
+
+ 

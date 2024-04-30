@@ -1,6 +1,8 @@
 import logo from "./logo.svg";
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "axios"
+import Interface from './interface';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 
 function App() {
@@ -61,76 +63,97 @@ function App() {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3001/api/checkUserExists", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ login: loginData.email }),
-      });
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data); // Log server response
-        //window.location.href = "./pomodoro.html"; 
-        window.location.href = "./pomodoro.html";
-      } else {
-        console.error("Failed to login:", response.statusText);
-      }
+      // Simulate login check
+      // Replace this with actual login check in your backend
+      // For now, it just redirects to the Interface component
+      history.push('/interface');
     } catch (error) {
       console.error("Error during login:", error);
-      //window.location.href = "./pomodoro.html";
-      window.location.href = "./pomodoro.html";
     }
   };
 
-  return (
-    <div className="App">
-      <h2>Registration Form</h2>
-      <form onSubmit={handleRegistrationSubmit}>
-        <div>
-          <label>First Name:</label>
-          <input
-            type="text"
-            name="firstName"
-            value={registrationData.firstName}
-            onChange={handleRegistrationChange}
-          />
-        </div>
-        <div>
-          <label>Last Name:</label>
-          <input
-            type="text"
-            name="lastName"
-            value={registrationData.lastName}
-            onChange={handleRegistrationChange}
-          />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={registrationData.email}
-            onChange={handleRegistrationChange}
-          />
-        </div>
-        <button type="submit">Register</button>
-      </form>
 
-      <h2>Login Form</h2>
-      <form onSubmit={handleLoginSubmit}>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={loginData.email}
-            onChange={handleLoginChange}
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
+// CHANGE FOR DEMO VID  
+  // const handleLoginSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await fetch("http://localhost:3001/api/checkUserExists", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ login: loginData.email }),
+  //     });
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       console.log(data); // Log server response
+  //       //window.location.href = "./pomodoro.html"; 
+  //       window.location.href = "../pomodoro.html";
+  //     } else {
+  //       console.error("Failed to login:", response.statusText);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during login:", error);
+  //     //window.location.href = "./pomodoro.html";
+  //     window.location.href = "../pomodoro.html";
+  //   }
+  // };
+
+  return (
+    <Router>
+      <div className="App">
+        <h2>Registration Form</h2>
+        <form onSubmit={handleRegistrationSubmit}>
+          <div>
+            <label>First Name:</label>
+            <input
+              type="text"
+              name="firstName"
+              value={registrationData.firstName}
+              onChange={handleRegistrationChange}
+            />
+          </div>
+          <div>
+            <label>Last Name:</label>
+            <input
+              type="text"
+              name="lastName"
+              value={registrationData.lastName}
+              onChange={handleRegistrationChange}
+            />
+          </div>
+          <div>
+            <label>Email:</label>
+            <input
+              type="email"
+              name="email"
+              value={registrationData.email}
+              onChange={handleRegistrationChange}
+            />
+          </div>
+          <button type="submit">Register</button>
+        </form>
+
+        <h2>Login Form</h2>
+        <form onSubmit={handleLoginSubmit}>
+          <div>
+            <label>Email:</label>
+            <input
+              type="email"
+              name="email"
+              value={loginData.email}
+              onChange={handleLoginChange}
+            />
+          </div>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+
+      <Switch>
+        <Route path="/interface" component={Interface} />
+      </Switch>
+    </Router>
+    
   );
 }
 

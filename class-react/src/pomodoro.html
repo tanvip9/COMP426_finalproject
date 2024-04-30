@@ -8,13 +8,13 @@
     
   </head>
   <body>
-    <a href="registration.html">Registration</a>
-    <a href = "index.html">Home</a>
-    <a href = "pomodoro.html">Pomodoro</a>
-    <p>Pomodoro</p>
+    <!-- DELETE -->
+    <div class="title">
+      <h1>Welcome to your Pomodoro Study Tool Tanvi!</h1>
+    </div>
+    
     <div class="pomodoro-container">
-      <progress id="progress-bar" value="0"></progress>
-      <div class="progress-bar"></div>
+      
       <div class="timer">
         <div class="all-buttons" id="buttons">
           <button data-mode="pomodoro" class="button active mode-button"id="pomodoro-start">Pomodoro</button>
@@ -26,8 +26,14 @@
           <span class="separator">:</span>
           <span id="seconds">00</span>
         </div>
+        <progress id="progress-bar" value="0"></progress>
+          <div class="progress-bar"></div>
         <button class="start-button" data-action="start" id="start-timer-btn">Start</button>
       </div>
+    </div>
+
+    <div class="instructions">
+      <h3>Add some music to your study session!</h3>
     </div>
 
     <div class="spotify-container">        

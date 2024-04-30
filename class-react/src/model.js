@@ -1,6 +1,6 @@
 APIController = (function() {
     const clientId = 'cb9546ca89e545669cb57ec1c0f23a95';
-    const clientSecret = '1f3b695233124e78a96eccbf73c1a3ae'
+    const clientSecret = '1f3b695233124e78a96eccbf73c1a3ae';
 
     const _getToken = async () => {
 
@@ -116,13 +116,21 @@ UIController = (function() {
         }, 
 
         createPlaylist(text, value) {
-            const html = `<option value="${value}">${text}</option>`;
+            const html = `
+                <option value="${value}" style="margin-bottom: 5px;">
+                ${text}
+                </option>`;
             document.querySelector(DOMElements.selectPlaylist).insertAdjacentHTML('beforeend', html);
         },
 
 
         createTrack(id, name) {
-            const html = `<a href="#" class="list-group-item list-group-item-action list-group-item-light" id="${id}">${name}</a>`;
+            const html = `
+<div style="text-align: center;">
+        <a href="#" class="list-group-item list-group-item-action list-group-item-light" id="${id}" style="display: inline-block; margin-right: 10px; color: black; font-size: 18px;">
+            ${name}
+        </a>
+    </div>`;
             document.querySelector(DOMElements.divSonglist).insertAdjacentHTML('beforeend', html);
         },
 
@@ -132,19 +140,23 @@ UIController = (function() {
             const detailDiv = document.querySelector(DOMElements.divSongDetail);
             // any time user clicks a new song, we need to clear out the song detail div
             detailDiv.innerHTML = '';
-
-            const html = 
-            `
-            <div class="row col-sm-12 px-0">
-                <img src="${img}" alt="">        
-            </div>
-            <div class="row col-sm-12 px-0">
-                <label for="Genre" class="form-label col-sm-12">${title}:</label>
-            </div>
-            <div class="row col-sm-12 px-0">
-                <label for="artist" class="form-label col-sm-12">By ${artist}:</label>
-            </div> 
-            `;
+const html = `
+<div style="display: flex; justify-content: center;">
+  <div class="song-item" style="display: flex; align-items: center; margin-bottom: 20px;">
+    <div class="image" style="margin-right: 20px;">
+      <img src="${img}" alt="" style="width: 250px; height: 250px;">
+    </div>
+    <div class="info" style="flex: 1;">
+      <div class="Genre">
+        <label for="Genre" class="form-label" style="margin: 0; font-weight: light;">${title}:</label>
+      </div>
+      <div class="Artist">
+        <label for="artist" class="form-label" style="margin: 0; font-weight: light;">By ${artist}:</label>
+      </div>
+    </div>
+  </div>
+</div>
+`;
 
             detailDiv.insertAdjacentHTML('beforeend', html)
         },
@@ -229,16 +241,11 @@ APPController = (function(UICtrl, APICtrl) {
     });
 
     DOMInputs.tracks.addEventListener('click', async (e) => {
-
         e.preventDefault();
         UICtrl.resetTrackDetail();
-
         const token = UICtrl.getStoredToken().token;
-
         const trackEndpoint = e.target.id;
-
         const track = await APICtrl.getTrack(token, trackEndpoint);
-
         UICtrl.createTrackDetail(track.album.images[2].url, track.name, track.artists[0].name);
     });    
 
