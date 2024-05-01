@@ -60,44 +60,43 @@ function App() {
     }
   };
 
-  const handleLoginSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      // Simulate login check
-      // Replace this with actual login check in your backend
-      // For now, it just redirects to the Interface component
-      history.push('/interface');
-    } catch (error) {
-      console.error("Error during login:", error);
-    }
-  };
-
-
-// CHANGE FOR DEMO VID  
   // const handleLoginSubmit = async (e) => {
   //   e.preventDefault();
   //   try {
-  //     const response = await fetch("http://localhost:3001/api/checkUserExists", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ login: loginData.email }),
-  //     });
-  //     if (response.ok) {
-  //       const data = await response.json();
-  //       console.log(data); // Log server response
-  //       //window.location.href = "./pomodoro.html"; 
-  //       window.location.href = "../pomodoro.html";
-  //     } else {
-  //       console.error("Failed to login:", response.statusText);
-  //     }
+  //     // Simulate login check
+  //     // Replace this with actual login check in your backend
+  //     // For now, it just redirects to the Interface component
+  //     history.push('/interface');
   //   } catch (error) {
   //     console.error("Error during login:", error);
-  //     //window.location.href = "./pomodoro.html";
-  //     window.location.href = "../pomodoro.html";
   //   }
   // };
+
+
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:3001/api/checkUserExists", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ login: loginData.email }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data); // Log server response
+        //window.location.href = "./pomodoro.html"; 
+        window.location.href = "../pomodoro.html";
+      } else {
+        console.error("Failed to login:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      //window.location.href = "./pomodoro.html";
+      window.location.href = "../pomodoro.html";
+    }
+  };
 
   return (
     <Router>

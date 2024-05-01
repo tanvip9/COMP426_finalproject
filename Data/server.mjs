@@ -94,30 +94,54 @@ import {db} from './db.mjs';
     //     //return res.sendStatus(201).json("Success!");
     // });
 
-    app.post("/api/checkUserExists", async (req, res) => {
-        const { email } = req.body;
-        try {
-          const userExists = await checkUserExists(email);
-          console.log(userExists);
-          res.status(200).json({ exists: userExists });
-        } catch (error) {
-          console.error("Error checking user existence:", error);
-          res.status(500).json({ message: "An error occurred while checking user existence" });
-        }
-      });
 
-    const checkUserExists = (email) => {
-        return new Promise((resolve, reject) => {
-          const queryStr = "SELECT COUNT(*) AS count FROM users WHERE login = (?)";
-          db.get(queryStr, [email], (err, row) => {
+    
+
+    // app.post("/api/checkUserExists", (req, res) => {
+    //     const { email } = req.body;
+    //     try {
+    //       const userExists = checkUserExists(email);
+    //       console.log("await done");
+    //       console.log(userExists);
+    //       res.status(200).json({ exists: userExists });
+    //     } catch (error) {
+    //       console.error("Error checking user existence:", error);
+    //       res.status(500).json({ message: "An error occurred while checking user existence" });
+    //     }
+    //   });
+
+
+      app.post("/api/checkUserExists", (req, res) => {
+        const { email } = req.body;
+        console.log("pre-query");
+        const queryStr = "SELECT COUNT(*) AS count FROM users WHERE email =(?)";
+        db.get(queryStr, [email], (err, row) => {
             if (err) {
-              reject(err);
-            } else {
-              resolve(row.count > 0);
+                console.error("Error checking user existence:", err);
+                res.status(500).json({ message: "An error occurred while checking user existence" });
+                return;
             }
-          });
+            const userExists = row.count > 0;
+            console.log("User exists:", userExists);
+            res.status(200).json({ exists: userExists });
         });
-      };
+    });
+    
+
+    //   const checkUserExists = (email) => {
+    //     return new Promise((resolve, reject) => {
+    //         console.log("in promise");
+    //         const queryStr = "SELECT COUNT(*) AS count FROM users WHERE email = ?";
+    //         db.get(queryStr, [email], (err, row) => {
+    //             if (err) {
+    //                 reject(err);
+    //             } else {
+    //                 resolve(row.count > 0);
+    //             }
+    //         });
+    //         console.log("db evaluated");
+    //     });
+    // };
 
     app.listen(port, () => {
         console.log(`Server running on http://localhost:${port}`);
